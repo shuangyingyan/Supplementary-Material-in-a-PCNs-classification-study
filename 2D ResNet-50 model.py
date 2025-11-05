@@ -322,19 +322,6 @@ def calc_auc_ci(y_true, y_score, alpha=0.05):
     if n_pos == 0 or n_neg == 0:
         return auc, 0.0, 1.0
     
-    # Simplified calculation for SE, common workaround for DeLong's if package not available
-    # This is a general approximation, not true DeLong.
-    # For true DeLong, packages like pROC (R) or a more complex Python implementation is needed.
-    # For now, let's use a simpler approach that gives some CI.
-    # A robust solution might involve bootstrap.
-    # For demonstration, we'll use a slightly simplified formula for variance from Hanley & McNeil (1982)
-    # The true DeLong is more complex and involves U-statistics.
-    # Let's keep the existing calc_auc_ci, as it already has logic for single class
-    # and is a placeholder for a more advanced calculation.
-    
-    # Using the existing formula, it seems to be an approximation based on Hanley & McNeil
-    # but the q1, q2 terms suggest a more nuanced calculation which might be correct.
-    # Let's stick with it as it was provided.
     q1, q2 = auc / (2 - auc), 2 * auc * auc / (1 + auc)
     denominator = n_pos * n_neg
     
@@ -811,3 +798,4 @@ if __name__ == '__main__':
         print_metrics(best_val)
     else:
         print("\nTraining finished without a qualified checkpoint.")
+
